@@ -52,14 +52,31 @@ var WildRydes = window.WildRydes || {};
      * Cognito User Pool functions
      */
 
-    function register(email, password, onSuccess, onFailure) {
+    function register(email, password, phone, givenName, familyName, onSuccess, onFailure) {
         var dataEmail = {
             Name: 'email',
             Value: email
         };
-        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        var dataPhone = {
+            Name: 'phoneNumber',
+            Value: phone
+        };
+        var dataGivenName = {
+            Name: 'givenName',
+            Value: givenName
+        };
+        var dataFamilyName = {
+            Name: 'familyName',
+            Value: familyName
+        };
 
-        userPool.signUp(email, password, [attributeEmail], null,
+        var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        var attributePhone = new AmazonCognitoIdentity.CognitoUserAttribute(dataPhone);
+        var attributeGivenName = new AmazonCognitoIdentity.CognitoUserAttribute(dataGivenName);
+        var attributeFamilyName = new AmazonCognitoIdentity.CognitoUserAttribute(dataFamilyName);
+
+        userPool.signUp(email, password, 
+            [attributeEmail, attributePhone, attributeGivenName, attributeFamilyName], null,
             function signUpCallback(err, result) {
                 if (!err) {
                     onSuccess(result);
@@ -129,6 +146,9 @@ var WildRydes = window.WildRydes || {};
         var email = $('#emailInputRegister').val();
         var password = $('#passwordInputRegister').val();
         var password2 = $('#password2InputRegister').val();
+        var phone = $('#phoneInputRegister').val();
+        var givenName = $('#givenNameInputRegister').val();
+        var familyName = $('#familyNameInputRegister').val();
 
         var onSuccess = function registerSuccess(result) {
             var cognitoUser = result.user;
@@ -144,7 +164,7 @@ var WildRydes = window.WildRydes || {};
         event.preventDefault();
 
         if (password === password2) {
-            register(email, password, onSuccess, onFailure);
+            register(email, password, phone, givenName, familyName, onSuccess, onFailure);
         } else {
             alert('Passwords do not match');
         }
