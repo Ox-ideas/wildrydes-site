@@ -7,6 +7,7 @@ html, body, #main, #map {
 
 body {
     background-color: chocolate;
+    background-size: 100% 100%;
 }
 
 .info {
