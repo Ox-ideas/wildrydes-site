@@ -5,6 +5,10 @@ html, body, #main, #map {
     width: 100%;
 }
 
+body {
+    background-color: chocolate;
+}
+
 .info {
     position: absolute;
     right: 10px;
