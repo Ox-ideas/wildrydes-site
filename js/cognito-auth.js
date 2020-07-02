@@ -58,15 +58,15 @@ var WildRydes = window.WildRydes || {};
             Value: email
         };
         var dataPhone = {
-            Name: 'phoneNumber',
+            Name: 'phone_number',
             Value: phone
         };
         var dataGivenName = {
-            Name: 'givenName',
+            Name: 'given_name',
             Value: givenName
         };
         var dataFamilyName = {
-            Name: 'familyName',
+            Name: 'family_name',
             Value: familyName
         };
 
